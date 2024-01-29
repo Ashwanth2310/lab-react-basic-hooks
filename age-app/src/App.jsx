@@ -1,27 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React,{ useState } from 'react';
+import './App.css';
+import UseContext from './cComponents/UseContext';
+
+export const ToggleTheme = React.createContext()
 
 function App() {
-  const [age, setage] = useState(0)
-  const [sibling, setSib] = useState(0)
+
+  const [state,setState] = useState(true)
+
+  const handleToggle = ()=>{
+    setState(state=>!state)
+  }
 
   return (
-    <>
-
-      <div className="card">
-      <h2> Your current Age is {age} </h2>
-      <h2>Your siblings {sibling}</h2>
-        <button onClick={() => setage((age) => age + 1)}>
-          Get Older 💀
-        </button>
-        <button onClick={() => setSib((sibling) => sibling + 1)}>
-          Spawn Siblings 🧌
-        </button>
-      </div>
-    </>
-  )
+    <ToggleTheme.Provider value={state}>
+      <button onClick={handleToggle}>Toggle</button>
+      <UseContext/>
+    </ToggleTheme.Provider>
+  );
 }
 
-export default App
+export default App;
